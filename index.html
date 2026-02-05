@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>L&D Tools Overview</title>
+<style>
+  :root {
+    --primary: #003A5D;
+    --secondary: #F4F6F8;
+    --accent: #0072CE;
+    --text: #1F2933;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--secondary);
+    color: var(--text);
+  }
+
+  .container {
+    display: flex;
+    height: 100vh;
+  }
+
+  /* LEFT PANEL */
+  .sidebar {
+    width: 260px;
+    background: var(--primary);
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 10px;
+  }
+
+  .nav-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+
+  .nav-btn:hover,
+  .nav-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* CONTENT */
+  .content {
+    flex: 1;
+    padding: 40px;
+    box-sizing: border-box;
+    background: white;
+  }
+
+  .content h1 {
+    margin-top: 0;
+    font-size: 28px;
+    color: var(--primary);
+  }
+
+  .section {
+    display: none;
+  }
+
+  .section.active {
+    display: block;
+  }
+
+  .block {
+    margin-bottom: 20px;
+  }
+
+  .label {
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- LEFT NAV -->
+  <div class="sidebar">
+    <h2>L&D Tooling</h2>
+    <button class="nav-btn active" onclick="showSection('canva')">Canva Premium</button>
+    <button class="nav-btn" onclick="showSection('articulate')">Articulate 360</button>
+    <button class="nav-btn" onclick="showSection('synthesia')">Synthesia</button>
+    <button class="nav-btn" onclick="showSection('smartsheet')">Smartsheet</button>
+    <button class="nav-btn" onclick="showSection('zapier')">Zapier</button>
+  </div>
+
+  <!-- RIGHT CONTENT -->
+  <div class="content">
+
+    <!-- CANVA -->
+    <div id="canva" class="section active">
+      <h1>Canva Premium</h1>
+
+      <div class="block">
+        <div class="label">Use Case</div>
+        Visual and didactic content creation for training materials.
+      </div>
+
+      <div class="block">
+        <div class="label">Problem Solved</div>
+        Slow design turnaround and inconsistent visual quality.
+      </div>
+
+      <div class="block">
+        <div class="label">Value</div>
+        Fast, on-brand visuals created directly by L&D without designers.
+      </div>
+
+      <div class="block">
+        <div class="label">Annual Cost</div>
+        $600 USD (3 licenses)
+      </div>
+    </div>
+
+    <!-- ARTICULATE -->
+    <div id="articulate" class="section">
+      <h1>Articulate 360</h1>
+
+      <div class="block">
+        <div class="label">Use Case</div>
+        Creation of LMS-compatible eLearning modules.
+      </div>
+
+      <div class="block">
+        <div class="label">Problem Solved</div>
+        Manual and inconsistent course development.
+      </div>
+
+      <div class="block">
+        <div class="label">Value</div>
+        Structured, reusable, and scalable training content.
+      </div>
+
+      <div class="block">
+        <div class="label">Annual Cost</div>
+        $2,949 USD (AI + Standard)
+      </div>
+    </div>
+
+    <!-- SYNTHESIA -->
+    <div id="synthesia" class="section">
+      <h1>Synthesia</h1>
+
+      <div class="block">
+        <div class="label">Use Case</div>
+        AI-generated training videos with avatars.
+      </div>
+
+      <div class="block">
+        <div class="label">Problem Solved</div>
+        High effort and cost of video recording.
+      </div>
+
+      <div class="block">
+        <div class="label">Value</div>
+        Scalable, multilingual video creation without filming.
+      </div>
+
+      <div class="block">
+        <div class="label">Annual Cost</div>
+        $216 USD (1 license)
+      </div>
+    </div>
+
+    <!-- SMARTSHEET -->
+    <div id="smartsheet" class="section">
+      <h1>Smartsheet</h1>
+
+      <div class="block">
+        <div class="label">Use Case</div>
+        Project and request management for L&D.
+      </div>
+
+      <div class="block">
+        <div class="label">Problem Solved</div>
+        Disorganized training requests and poor visibility.
+      </div>
+
+      <div class="block">
+        <div class="label">Value</div>
+        Centralized workflows, dashboards, and automation.
+      </div>
+
+      <div class="block">
+        <div class="label">Annual Cost</div>
+        $228 USD (up to 13 users)
+      </div>
+    </div>
+
+    <!-- ZAPIER -->
+    <div id="zapier" class="section">
+      <h1>Zapier</h1>
+
+      <div class="block">
+        <div class="label">Use Case</div>
+        Automation of onboarding and training processes.
+      </div>
+
+      <div class="block">
+        <div class="label">Problem Solved</div>
+        Manual follow-ups and repetitive admin work.
+      </div>
+
+      <div class="block">
+        <div class="label">Value</div>
+        Faster workflows with fewer errors.
+      </div>
+
+      <div class="block">
+        <div class="label">Annual Cost</div>
+        $240 USD (3 licenses)
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
