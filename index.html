@@ -306,19 +306,32 @@
     .cost{ font-weight:950; font-size:15px; }
     .action a{ color: var(--brand); font-weight:900; }
 
+    /* Updated Pill Styles */
     .pill{
       display:inline-flex;
       align-items:center;
-      gap:8px;
-      background: var(--pill);
-      border:1px solid #D9E6FF;
-      color: #1D4ED8;
-      padding:6px 10px;
+      padding:6px 12px;
       border-radius:999px;
       font-size:12px;
       font-weight:950;
-      margin-left:10px;
+      border: 1px solid transparent;
     }
+    .p1{ background:#e8f7ee; border-color:#bfe8cd; color: #065f46; }
+    .p2{ background:#fff6e5; border-color:#f1d7a8; color: #92400e; }
+    .p3{ background:#ffe9e9; border-color:#f2bcbc; color: #991b1b; }
+
+    /* Legend Styles */
+    .priority-legend{
+      margin: 24px 0;
+      padding: 16px 20px;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow2);
+    }
+    .legend-title{ font-weight:900; margin-bottom:12px; font-size:14px; text-transform:uppercase; letter-spacing:0.05em;}
+    .legend-items{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+    .legend-note{ margin-top:12px; color:var(--muted); font-size:12px; }
 
     .page{ display:none; }
     .page.active{ display:block; }
@@ -373,34 +386,14 @@
     .toolHero .art{
       margin-top:14px;
       border-radius:18px;
-      height:220px;
       border:1px solid var(--line);
-      background:
-        radial-gradient(900px 260px at 15% 20%, rgba(37,99,235,.16), transparent 60%),
-        radial-gradient(900px 260px at 80% 0%, rgba(14,165,233,.12), transparent 60%),
-        linear-gradient(135deg, #FFFFFF, #F5F7FF);
       position:relative;
       overflow:hidden;
     }
-    .toolHero .art::after{
-      content:"";
-      position:absolute; inset:-60px -60px auto auto;
-      width:260px; height:260px;
-      border-radius:999px;
-      background: rgba(15,23,42,.06);
-      filter: blur(0px);
-    }
-    .toolHero .art .artLabel{
-      position:absolute; left:16px; bottom:14px;
-      font-weight:950;
-      color:#0B1220;
-      letter-spacing:.02em;
-      font-size:12px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.75);
-      backdrop-filter: blur(8px);
+    .toolHero .art img{
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     .stackCards{ display:grid; gap:16px; }
@@ -429,6 +422,14 @@
       font-size:15px;
       font-weight:950;
     }
+    .infoCard .label{
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        color: var(--muted);
+        font-weight: 800;
+        margin-bottom: 4px;
+    }
     .infoCard p{
       margin:6px 0 0;
       color:var(--muted);
@@ -443,6 +444,23 @@
       line-height:1.55;
     }
     .bullets li{ margin:6px 0; }
+
+    /* Articulate Specific Grid */
+    .license-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .license-card{
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--shadow2);
+    }
+    .license-title{ font-weight: 900; font-size: 16px; margin-bottom: 4px; }
+    .license-sub{ font-size: 12px; color: var(--muted); margin-bottom: 12px; }
 
     .investment{
       border-radius:22px;
@@ -624,7 +642,6 @@
     </aside>
 
     <main class="main">
-      <!-- DASHBOARD -->
       <section id="page-dashboard" class="page active">
         <div class="topline">
           <div class="crumb">Dashboard</div>
@@ -644,6 +661,18 @@
             <span class="chip">Operational visibility</span>
             <span class="chip">Automation</span>
             <span class="chip">Knowledge &amp; delivery</span>
+          </div>
+        </div>
+
+        <div class="priority-legend">
+          <div class="legend-title">Prioridad (referencia)</div>
+          <div class="legend-items">
+            <span class="pill p1">Alta (1)</span>
+            <span class="pill p2">Media (2)</span>
+            <span class="pill p3">Baja (3)</span>
+          </div>
+          <div class="legend-note">
+            Basado en impacto inmediato para L&amp;D y necesidad operativa según reporte financiero.
           </div>
         </div>
 
@@ -688,7 +717,7 @@
                 <th style="width:26%;">Platform</th>
                 <th>Strategic Value</th>
                 <th style="width:16%;">Annual Cost</th>
-                <th style="width:14%;">Action</th>
+                <th style="width:14%;">Priority</th>
               </tr>
             </thead>
             <tbody>
@@ -696,43 +725,31 @@
                 <td class="platform">Canva Premium</td>
                 <td class="value">Visual agility &amp; brand consistency</td>
                 <td class="cost">$600</td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('canva')">View Details</a></td>
+                <td><span class="pill p1">Alta (1)</span></td>
               </tr>
               <tr>
                 <td class="platform">Articulate 360</td>
                 <td class="value">Structured course logic &amp; SCORM publishing</td>
                 <td class="cost">$2,949</td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('articulate')">View Details</a></td>
+                <td><span class="pill p1">Alta (1)</span></td>
               </tr>
               <tr>
                 <td class="platform">Synthesia</td>
                 <td class="value">Scalable multilingual video production</td>
                 <td class="cost">$216</td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('synthesia')">View Details</a></td>
+                <td><span class="pill p1">Alta (1)</span></td>
               </tr>
               <tr>
                 <td class="platform">Smartsheet</td>
                 <td class="value">Operational visibility &amp; reporting</td>
                 <td class="cost">$228</td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('smartsheet')">View Details</a></td>
+                <td><span class="pill p2">Media (2)</span></td>
               </tr>
               <tr>
                 <td class="platform">Zapier</td>
-                <td class="value">Automation across onboarding, comms, and tracking</td>
+                <td class="value">Automation across onboarding &amp; tracking</td>
                 <td class="cost">$240</td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('zapier')">View Details</a></td>
-              </tr>
-              <tr>
-                <td class="platform">Confluence <span class="pill">Included</span></td>
-                <td class="value">Single source of truth for documentation &amp; enablement</td>
-                <td class="cost">—</td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('confluence')">View Details</a></td>
-              </tr>
-              <tr>
-                <td class="platform">Jira <span class="pill">Included</span></td>
-                <td class="value">Work intake, prioritization, and delivery tracking</td>
-                <td class="cost">—</td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('jira')">View Details</a></td>
+                <td><span class="pill p3">Baja (3)</span></td>
               </tr>
             </tbody>
           </table>
@@ -745,7 +762,6 @@
         </div>
       </section>
 
-      <!-- CANVA -->
       <section id="page-canva" class="page">
         <div class="topline">
           <div class="crumb">Dashboard / <b>Canva Premium</b></div>
@@ -758,18 +774,25 @@
             <div class="h1">Canva Premium</div>
             <p class="desc">
               The design workspace for L&amp;D to produce fast, consistent, on-brand visuals: job aids, infographics,
-              learning comms, and slide decks — without relying on a dedicated design team for every asset.
+              learning comms, and slide decks.
             </p>
 
-            <div class="art" style="background:
-              radial-gradient(900px 260px at 15% 20%, rgba(16,185,129,.18), transparent 60%),
-              radial-gradient(900px 260px at 80% 0%, rgba(14,165,233,.12), transparent 60%),
-              linear-gradient(135deg, #FFFFFF, #F2FFFA);">
-              <div class="artLabel">Brand-consistent templates • AI-assisted design</div>
+            <div class="art">
+                <img src="assets/images/Canva.png" alt="Canva Interface">
             </div>
           </div>
 
           <div class="stackCards">
+            <div class="infoCard">
+                <div class="infoRow">
+                    <div class="ico">⭐</div>
+                    <div>
+                        <div class="label">Prioridad</div>
+                        <span class="pill p1">Alta (1)</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="infoCard">
               <div class="infoRow">
                 <div class="ico">💡</div>
@@ -785,22 +808,7 @@
                 <div class="ico" style="color:var(--danger);">⛔</div>
                 <div>
                   <h3>Problem Solved</h3>
-                  <p>Bottlenecks in design workflows, inconsistent brand adherence, and high turnaround time for assets.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Standardizes branding through templates + locked styles.</li>
-                <li>Reduces rework via shared libraries and approvals.</li>
-                <li>Speeds up training comms (email/social/slide formats).</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">📈</div>
-                <div>
-                  <h3>Direct Value</h3>
-                  <p>Faster delivery with consistent quality — L&amp;D can create and iterate assets in hours, not weeks.</p>
+                  <p>Standardizes branding through templates and speeds up training communication cycles.</p>
                 </div>
               </div>
             </div>
@@ -810,16 +818,11 @@
               <div class="amt">$600<small>.00</small></div>
               <div class="sub">Allocated for 3 core designer licenses.</div>
               <div class="line"><div style="width:62%"></div></div>
-              <div class="foot">
-                <span>Budget category: Content creation</span>
-                <span class="hintLink">Pricing &amp; tiers</span>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ARTICULATE -->
       <section id="page-articulate" class="page">
         <div class="topline">
           <div class="crumb">Dashboard / <b>Articulate 360</b></div>
@@ -833,15 +836,28 @@
             </div>
             <div class="h1">Articulate 360</div>
             <p class="desc">
-              Industry-leading authoring suite for LMS-compatible courses. Use Rise 360 for responsive microlearning
-              and Storyline 360 for higher-fidelity interactions and branching.
+              Industry-leading authoring suite for LMS-compatible courses. Now including AI-assisted building to optimize content production.
             </p>
 
-            <div class="art" style="background:
-              radial-gradient(900px 260px at 15% 20%, rgba(79,70,229,.20), transparent 60%),
-              radial-gradient(900px 260px at 80% 0%, rgba(37,99,235,.14), transparent 60%),
-              linear-gradient(135deg, #FFFFFF, #F3F4FF);">
-              <div class="artLabel">SCORM-ready • Structured course logic • Reusable blocks</div>
+            <div class="art">
+                <img src="assets/images/Articulate.png" alt="Articulate 360">
+            </div>
+
+            <div class="license-grid">
+                <div class="license-card">
+                    <div class="license-title">Articulate 360 AI</div>
+                    <div class="license-sub">1 Licencia • <span class="pill p1">Alta (1)</span></div>
+                    <div class="label">Uso</div>
+                    <p style="font-size:12px; color:var(--muted);">Optimización por IA y creación rápida de contenido.</p>
+                    <div style="margin-top:8px; font-weight:900;">$1,749.00 USD</div>
+                </div>
+                <div class="license-card">
+                    <div class="license-title">Articulate 360 Standard</div>
+                    <div class="license-sub">1 Licencia • <span class="pill p2">Media (2)</span></div>
+                    <div class="label">Uso</div>
+                    <p style="font-size:12px; color:var(--muted);">Creación de material e-learning compatible con LMS.</p>
+                    <div style="margin-top:8px; font-weight:900;">$1,200.00 USD</div>
+                </div>
             </div>
           </div>
 
@@ -851,14 +867,9 @@
                 <div class="ico">🎯</div>
                 <div>
                   <h3>Primary Use Case</h3>
-                  <p>Build interactive eLearning modules and publish to the LMS (SCORM/xAPI support).</p>
+                  <p>Build interactive eLearning modules (Rise/Storyline) and publish to the LMS.</p>
                 </div>
               </div>
-              <ul class="bullets">
-                <li>Rise 360: fast, responsive, template-driven content.</li>
-                <li>Storyline 360: custom interactions, scenarios, branching.</li>
-                <li>Review cycles: stakeholder feedback + iteration.</li>
-              </ul>
             </div>
 
             <div class="infoCard">
@@ -866,22 +877,7 @@
                 <div class="ico" style="color:var(--danger);">⛔</div>
                 <div>
                   <h3>Problem Solved</h3>
-                  <p>Manual course builds and inconsistent design patterns that slow publishing and QA.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Standardizes course structure via templates and reusable assets.</li>
-                <li>Reduces LMS compatibility risk with proven publishing formats.</li>
-                <li>Supports accessibility and consistent UI patterns.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">📦</div>
-                <div>
-                  <h3>Reusable Library Value</h3>
-                  <p>Creates a scalable course system (blocks, templates, question banks) that compounds over time.</p>
+                  <p>Standardizes course structure and reduces LMS compatibility risk with proven SCORM formats.</p>
                 </div>
               </div>
             </div>
@@ -889,18 +885,13 @@
             <div class="investment" style="background: linear-gradient(135deg, #1F1B73, #4F46E5);">
               <div class="cap">Total License Investment</div>
               <div class="amt">$2,949<small>.00</small></div>
-              <div class="sub">Combination of AI Teams + Standard licenses (annual).</div>
+              <div class="sub">Total aggregated annual cost for both licenses.</div>
               <div class="line"><div style="width:78%"></div></div>
-              <div class="foot">
-                <span>Budget category: eLearning authoring</span>
-                <span class="hintLink">Pricing tiers</span>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SYNTHESIA -->
       <section id="page-synthesia" class="page">
         <div class="topline">
           <div class="crumb">Dashboard / <b>Synthesia</b></div>
@@ -914,32 +905,33 @@
             </div>
             <div class="h1">Synthesia</div>
             <p class="desc">
-              Video creation at scale using AI presenters and scripted narration — ideal for consistent training messages,
-              multilingual rollouts, and fast updates without re-filming.
+              Video creation at scale using AI presenters and scripted narration — ideal for consistent training messages.
             </p>
 
-            <div class="art" style="background:
-              radial-gradient(900px 260px at 15% 20%, rgba(225,29,72,.18), transparent 60%),
-              radial-gradient(900px 260px at 80% 0%, rgba(239,68,68,.12), transparent 60%),
-              linear-gradient(135deg, #FFFFFF, #FFF2F6);">
-              <div class="artLabel">Script-to-video • Quick updates • Localization</div>
+            <div class="art">
+                <img src="assets/images/Synthesia.png" alt="Synthesia Dashboard">
             </div>
           </div>
 
           <div class="stackCards">
             <div class="infoCard">
+                <div class="infoRow">
+                    <div class="ico">⭐</div>
+                    <div>
+                        <div class="label">Prioridad</div>
+                        <span class="pill p1">Alta (1)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="infoCard">
               <div class="infoRow">
                 <div class="ico">🌍</div>
                 <div>
                   <h3>Primary Use Case</h3>
-                  <p>Create consistent, repeatable training videos and announcements without filming logistics.</p>
+                  <p>Create consistent training videos and announcements without filming logistics.</p>
                 </div>
               </div>
-              <ul class="bullets">
-                <li>Ideal for onboarding intros, compliance reminders, internal enablement.</li>
-                <li>Fast iteration: update text, regenerate, re-publish.</li>
-                <li>Supports distributed teams and global communication.</li>
-              </ul>
             </div>
 
             <div class="infoCard">
@@ -947,22 +939,7 @@
                 <div class="ico" style="color:var(--danger);">⛔</div>
                 <div>
                   <h3>Problem Solved</h3>
-                  <p>High cost and scheduling friction of professional recording/editing for internal training.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Reduces dependency on video studios and SMEs “being on camera.”</li>
-                <li>Enables consistent voice/tone across multiple programs.</li>
-                <li>Shortens time-to-publish for urgent content changes.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">⚡</div>
-                <div>
-                  <h3>Global Value</h3>
-                  <p>Scalable multilingual video creation without re-filming for each region.</p>
+                  <p>Reduces dependency on video studios and SMES "being on camera".</p>
                 </div>
               </div>
             </div>
@@ -970,18 +947,13 @@
             <div class="investment" style="background: linear-gradient(135deg, #7F1235, #E11D48);">
               <div class="cap">Annual Starter Plan</div>
               <div class="amt">$216<small>.00</small></div>
-              <div class="sub">Includes a monthly video credit allocation (per plan).</div>
+              <div class="sub">Includes monthly video credits for L&amp;D.</div>
               <div class="line"><div style="width:55%"></div></div>
-              <div class="foot">
-                <span>Budget category: Video enablement</span>
-                <span class="hintLink">Pricing guide</span>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SMARTSHEET -->
       <section id="page-smartsheet" class="page">
         <div class="topline">
           <div class="crumb">Dashboard / <b>Smartsheet</b></div>
@@ -995,32 +967,33 @@
             </div>
             <div class="h1">Smartsheet</div>
             <p class="desc">
-              The operational backbone for project management, training requests, and reporting.
-              Turns flat tracking into dashboards, workflows, and clear stakeholder visibility.
+              The operational backbone for project management, training requests, and portfolio reporting.
             </p>
 
-            <div class="art" style="background:
-              radial-gradient(900px 260px at 15% 20%, rgba(51,65,85,.16), transparent 60%),
-              radial-gradient(900px 260px at 80% 0%, rgba(37,99,235,.10), transparent 60%),
-              linear-gradient(135deg, #FFFFFF, #F2F6FF);">
-              <div class="artLabel">Dashboards • Request intake • Portfolio visibility</div>
+            <div class="art">
+                <img src="assets/images/Smartsheets.png" alt="Smartsheet Portfolio">
             </div>
           </div>
 
           <div class="stackCards">
             <div class="infoCard">
+                <div class="infoRow">
+                    <div class="ico">⭐</div>
+                    <div>
+                        <div class="label">Prioridad</div>
+                        <span class="pill p2">Media (2)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="infoCard">
               <div class="infoRow">
                 <div class="ico">🧭</div>
                 <div>
                   <h3>Primary Use Case</h3>
-                  <p>Track training requests, delivery milestones, and recurring reporting with clear ownership.</p>
+                  <p>Track training requests, delivery milestones, and recurring reporting.</p>
                 </div>
               </div>
-              <ul class="bullets">
-                <li>Standard intake (forms) → triage → delivery tracker.</li>
-                <li>Dashboards for stakeholders and leadership.</li>
-                <li>Automated reminders + status updates.</li>
-              </ul>
             </div>
 
             <div class="infoCard">
@@ -1028,22 +1001,7 @@
                 <div class="ico" style="color:var(--danger);">⛔</div>
                 <div>
                   <h3>Problem Solved</h3>
-                  <p>Disconnected email/spreadsheet tracking that makes prioritization and accountability unclear.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Single source of truth for training work and metrics.</li>
-                <li>Reduces “where is this at?” churn from stakeholders.</li>
-                <li>Improves consistency of reporting and follow-ups.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">📌</div>
-                <div>
-                  <h3>Strategic Impact</h3>
-                  <p>Centralized visibility and portfolio management for multiple training initiatives.</p>
+                  <p>Disconnected tracking that makes prioritization and accountability unclear.</p>
                 </div>
               </div>
             </div>
@@ -1051,18 +1009,13 @@
             <div class="investment" style="background: linear-gradient(135deg, #0B1220, #334155);">
               <div class="cap">Annual Business Rate</div>
               <div class="amt">$228<small>.00</small></div>
-              <div class="sub">Coverage for team collaboration and operational tracking.</div>
+              <div class="sub">Coverage for team collaboration and intake.</div>
               <div class="line"><div style="width:58%"></div></div>
-              <div class="foot">
-                <span>Budget category: Operations</span>
-                <span class="hintLink">Pricing details</span>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ZAPIER -->
       <section id="page-zapier" class="page">
         <div class="topline">
           <div class="crumb">Dashboard / <b>Zapier</b></div>
@@ -1076,55 +1029,30 @@
             </div>
             <div class="h1">Zapier</div>
             <p class="desc">
-              The “glue” between systems. Automates data flow across LMS, HR, and communication tools so learners
-              receive the right actions at the right time — with fewer manual follow-ups.
+              Automates data flow across LMS, HR, and communication tools to remove administrative friction.
             </p>
-
-            <div class="art" style="background:
-              radial-gradient(900px 260px at 15% 20%, rgba(249,115,22,.18), transparent 60%),
-              radial-gradient(900px 260px at 80% 0%, rgba(37,99,235,.10), transparent 60%),
-              linear-gradient(135deg, #FFFFFF, #FFF6EF);">
-              <div class="artLabel">Multi-step workflows • Triggers • Notifications</div>
+            <div class="art" style="height:200px; display:grid; place-items:center; background:#FFF6EF; font-weight:900; color:var(--zapier);">
+                Workflow Automation Hub
             </div>
           </div>
 
           <div class="stackCards">
             <div class="infoCard">
+                <div class="infoRow">
+                    <div class="ico">⭐</div>
+                    <div>
+                        <div class="label">Prioridad</div>
+                        <span class="pill p3">Baja (3)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="infoCard">
               <div class="infoRow">
                 <div class="ico">🔁</div>
                 <div>
                   <h3>Primary Use Case</h3>
-                  <p>Automate onboarding and training follow-ups, status updates, and data syncing across tools.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Sync course completions to tracking sheets/dashboards.</li>
-                <li>Trigger scheduled follow-ups (email/Slack) based on status.</li>
-                <li>Generate weekly rollups for managers and stakeholders.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--danger);">⛔</div>
-                <div>
-                  <h3>Problem Solved</h3>
-                  <p>Manual follow-ups and repetitive admin work that creates errors and delays.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Reduces human error by standardizing triggers and rules.</li>
-                <li>Improves SLA adherence for onboarding experiences.</li>
-                <li>Scales without adding administrative headcount.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">🧱</div>
-                <div>
-                  <h3>Strategic Value</h3>
-                  <p>Automation increases reliability: the process runs even when people are busy, OOO, or shifting priorities.</p>
+                  <p>Automate onboarding follow-ups and data syncing across toolsets.</p>
                 </div>
               </div>
             </div>
@@ -1132,180 +1060,14 @@
             <div class="investment" style="background: linear-gradient(135deg, #7C2D12, #F97316);">
               <div class="cap">Professional Annual</div>
               <div class="amt">$240<small>.00</small></div>
-              <div class="sub">Supports unlimited multi-step automation workflows (per plan).</div>
+              <div class="sub">Supports unlimited multi-step automation workflows.</div>
               <div class="line"><div style="width:66%"></div></div>
-              <div class="foot">
-                <span>Budget category: Automation</span>
-                <span class="hintLink">Compare tiers</span>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- CONFLUENCE -->
-      <section id="page-confluence" class="page">
-        <div class="topline">
-          <div class="crumb">Dashboard / <b>Confluence</b></div>
-          <div class="tag"><span class="dot"></span> Knowledge Base</div>
-        </div>
-
-        <div class="toolGrid">
-          <div class="toolHero">
-            <div class="kicker">Tooling Deep Dive
-              <span class="badge" style="color:var(--conf);border-color:rgba(14,165,233,.25);background:rgba(14,165,233,.08);">KNOWLEDGE</span>
-            </div>
-            <div class="h1">Confluence</div>
-            <p class="desc">
-              The home for documented processes, L&amp;D standards, training catalogs, and manager/employee resources.
-              Enables consistent execution and self-service across the org.
-            </p>
-
-            <div class="art" style="background:
-              radial-gradient(900px 260px at 15% 20%, rgba(14,165,233,.18), transparent 60%),
-              radial-gradient(900px 260px at 80% 0%, rgba(37,99,235,.12), transparent 60%),
-              linear-gradient(135deg, #FFFFFF, #F0FBFF);">
-              <div class="artLabel">SSOT • Process docs • Resource centers</div>
-            </div>
-          </div>
-
-          <div class="stackCards">
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico">📚</div>
-                <div>
-                  <h3>Primary Use Case</h3>
-                  <p>Single source of truth for learning processes, reporting definitions, and enablement materials.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Standard operating procedures (SOPs) for training operations.</li>
-                <li>Resource centers for managers and employees.</li>
-                <li>Decision logs, templates, and playbooks.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--danger);">⛔</div>
-                <div>
-                  <h3>Problem Solved</h3>
-                  <p>Knowledge trapped in Slack threads, individual docs, or “tribal” memory that breaks continuity.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Improves consistency across new hires and cross-team handoffs.</li>
-                <li>Reduces repetitive questions by enabling self-service.</li>
-                <li>Creates audit-friendly documentation for compliance needs.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">🧩</div>
-                <div>
-                  <h3>Strategic Value</h3>
-                  <p>Enables scalable training operations by documenting how work is done — not just what is done.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="investment" style="background: linear-gradient(135deg, #075985, #0EA5E9);">
-              <div class="cap">Annual Cost</div>
-              <div class="amt">Included<small></small></div>
-              <div class="sub">Cost excluded from this proposal (already provisioned within existing Atlassian stack).</div>
-              <div class="line"><div style="width:50%"></div></div>
-              <div class="foot">
-                <span>Budget category: Knowledge management</span>
-                <span class="hintLink">Atlassian licensing</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- JIRA -->
-      <section id="page-jira" class="page">
-        <div class="topline">
-          <div class="crumb">Dashboard / <b>Jira</b></div>
-          <div class="tag"><span class="dot"></span> Work Tracking</div>
-        </div>
-
-        <div class="toolGrid">
-          <div class="toolHero">
-            <div class="kicker">Tooling Deep Dive
-              <span class="badge" style="color:var(--jira);border-color:rgba(37,99,235,.25);background:rgba(37,99,235,.08);">DELIVERY</span>
-            </div>
-            <div class="h1">Jira</div>
-            <p class="desc">
-              Intake, prioritization, and delivery tracking for L&amp;D work: training requests, course updates,
-              compliance initiatives, and operational improvements — with visibility across stakeholders.
-            </p>
-
-            <div class="art" style="background:
-              radial-gradient(900px 260px at 15% 20%, rgba(37,99,235,.18), transparent 60%),
-              radial-gradient(900px 260px at 80% 0%, rgba(14,165,233,.12), transparent 60%),
-              linear-gradient(135deg, #FFFFFF, #F2F7FF);">
-              <div class="artLabel">Intake → Prioritize → Deliver • SLAs • Reporting</div>
-            </div>
-          </div>
-
-          <div class="stackCards">
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico">📥</div>
-                <div>
-                  <h3>Primary Use Case</h3>
-                  <p>Centralized request intake and delivery tracking with clear ownership, due dates, and status.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Standardized ticket workflow (request → triage → build → QA → release).</li>
-                <li>SLA visibility for stakeholders (what is planned vs. in progress vs. blocked).</li>
-                <li>Better demand management for L&amp;D.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--danger);">⛔</div>
-                <div>
-                  <h3>Problem Solved</h3>
-                  <p>Unstructured requests across email/Slack that create ambiguity on priority and completion.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Reduces scope creep by documenting acceptance criteria and decisions.</li>
-                <li>Improves transparency: stakeholders can self-check status.</li>
-                <li>Enables forecasting: what the team can realistically deliver.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">📊</div>
-                <div>
-                  <h3>Strategic Value</h3>
-                  <p>Improves throughput and predictability for L&amp;D delivery — especially for compliance and onboarding.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="investment" style="background: linear-gradient(135deg, #1E3A8A, #2563EB);">
-              <div class="cap">Annual Cost</div>
-              <div class="amt">Included<small></small></div>
-              <div class="sub">Cost excluded from this proposal (already provisioned within existing Atlassian stack).</div>
-              <div class="line"><div style="width:50%"></div></div>
-              <div class="foot">
-                <span>Budget category: Work management</span>
-                <span class="hintLink">Atlassian licensing</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </main>
+      </main>
   </div>
 
   <script>
