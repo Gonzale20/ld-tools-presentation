@@ -23,16 +23,12 @@
       --warn:#F59E0B;
       --danger:#EF4444;
 
+      --chatgpt:#111827;
       --canva:#10B981;
       --articulate:#4F46E5;
       --synthesia:#E11D48;
       --smartsheet:#334155;
       --zapier:#F97316;
-      --conf:#0EA5E9;
-      --jira:#2563EB;
-
-      /* NEW */
-      --chatgpt:#111827;
     }
 
     *{ box-sizing:border-box; }
@@ -297,6 +293,7 @@
       background: #FBFCFE;
       border-bottom:1px solid var(--line);
       padding:14px 16px;
+      white-space:nowrap;
     }
     tbody td{
       padding:16px;
@@ -321,9 +318,9 @@
       font-size:12px;
       font-weight:950;
       margin-left:10px;
+      white-space:nowrap;
     }
 
-    /* Priority pills */
     .prio{
       display:inline-flex;
       align-items:center;
@@ -362,7 +359,6 @@
     .page{ display:none; }
     .page.active{ display:block; }
 
-    /* Tool layout */
     .toolGrid{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
@@ -410,7 +406,6 @@
       background:#F8FAFF;
     }
 
-    /* Image block */
     .toolHero .art{
       margin-top:14px;
       border-radius:18px;
@@ -563,7 +558,6 @@
       pointer-events:none;
     }
 
-    /* Breakdown box */
     .breakdown{
       margin-top:10px;
       border:1px solid rgba(255,255,255,.18);
@@ -585,7 +579,6 @@
     .breakdown b{ font-weight:950; }
     .breakdown .muted{ opacity:.82; font-weight:800; }
 
-    /* Embed card */
     .embedCard{
       background: var(--surface);
       border:1px solid var(--line);
@@ -678,9 +671,10 @@
 
         <h4>Tooling Deep Dive</h4>
 
-        <button class="navbtn" data-page="canva" onclick="go('canva')">
-          <span class="navicon">🎨</span>
-          <span class="navtext"><span class="label">Canva Premium</span><span class="hint">Creative engine</span></span>
+        <!-- NEW: ChatGPT (Priority #1) -->
+        <button class="navbtn" data-page="chatgpt" onclick="go('chatgpt')">
+          <span class="navicon">🤖</span>
+          <span class="navtext"><span class="label">ChatGPT Business</span><span class="hint">Assist &amp; acceleration</span></span>
         </button>
 
         <button class="navbtn" data-page="articulate" onclick="go('articulate')">
@@ -698,35 +692,22 @@
           <span class="navtext"><span class="label">Smartsheet</span><span class="hint">Ops hub</span></span>
         </button>
 
+        <button class="navbtn" data-page="canva" onclick="go('canva')">
+          <span class="navicon">🎨</span>
+          <span class="navtext"><span class="label">Canva Premium</span><span class="hint">Creative engine</span></span>
+        </button>
+
         <button class="navbtn" data-page="zapier" onclick="go('zapier')">
           <span class="navicon">⚡</span>
           <span class="navtext"><span class="label">Zapier</span><span class="hint">Automation</span></span>
         </button>
 
-        <!-- NEW -->
-        <button class="navbtn" data-page="chatgpt" onclick="go('chatgpt')">
-          <span class="navicon">🤖</span>
-          <span class="navtext"><span class="label">ChatGPT Business</span><span class="hint">AI assistant</span></span>
-        </button>
-
-        <button class="navbtn" data-page="confluence" onclick="go('confluence')">
-          <span class="navicon">📘</span>
-          <span class="navtext"><span class="label">Confluence</span><span class="hint">Knowledge base</span></span>
-        </button>
-
-        <button class="navbtn" data-page="jira" onclick="go('jira')">
-          <span class="navicon">✅</span>
-          <span class="navtext"><span class="label">Jira</span><span class="hint">Work tracking</span></span>
-        </button>
-
         <div class="budget">
           <div class="cap">Total Annual Budget</div>
-          <!-- kept as-is; ChatGPT included below as pending USD -->
-          <div class="amt">$4,233.00</div>
+          <div class="amt" id="totalBudget">$5,313.00</div>
           <div class="note">
-            Aggregated licensing for 5 primary platforms.
-            <br/>+ ChatGPT Business (Qty 3) — USD (pending rate confirmation).
-            <br/>Confluence &amp; Jira costs excluded (already provisioned).
+            Aggregated licensing for 6 platforms (incl. ChatGPT Business).
+            <br/>Costs are in USD.
           </div>
         </div>
       </nav>
@@ -749,12 +730,11 @@
             and content scalability — optimized for faster build cycles, consistent quality, and reliable reporting.
           </div>
           <div class="chips">
-            <span class="chip">Content authoring</span>
-            <span class="chip">Video at scale</span>
-            <span class="chip">Operational visibility</span>
+            <span class="chip">Instructional design</span>
+            <span class="chip">Administration &amp; reporting</span>
+            <span class="chip">Tracking &amp; measuring</span>
             <span class="chip">Automation</span>
-            <span class="chip">Knowledge &amp; delivery</span>
-            <span class="chip">AI productivity</span>
+            <span class="chip">AI acceleration</span>
           </div>
         </div>
 
@@ -764,9 +744,8 @@
               <h3>Core Stack Cost</h3>
               <div class="miniicon">💵</div>
             </div>
-            <!-- kept as-is; ChatGPT is a new add-on line item -->
-            <div class="metric">$4,233<small>/yr</small></div>
-            <p>Aggregated licensing for 5 primary platforms supporting L&amp;D content development, delivery, and operations. (ChatGPT Business added as a separate line item.)</p>
+            <div class="metric" id="coreStack">$5,313<small>/yr</small></div>
+            <p>Annual licensing for 6 platforms supporting L&amp;D design, delivery, operations, and AI acceleration.</p>
           </div>
 
           <div class="card">
@@ -774,8 +753,8 @@
               <h3>AI Readiness</h3>
               <div class="miniicon">🧠</div>
             </div>
-            <div class="metric">80%</div>
-            <p>Tools with native AI capabilities in the core stack (4 of 5). Jira/Confluence AI depends on current Atlassian licensing.</p>
+            <div class="metric">83%</div>
+            <p>Tools with native AI capabilities in the core stack (5 of 6).</p>
           </div>
 
           <div class="card">
@@ -784,7 +763,7 @@
               <div class="miniicon">👥</div>
             </div>
             <div class="metric">25+</div>
-            <p>Simultaneous collaborator access across the stack (creation, review cycles, requests, reporting workflows).</p>
+            <p>Simultaneous collaborator access across the stack (creation, review, requests, reporting workflows).</p>
           </div>
         </div>
 
@@ -797,72 +776,99 @@
           <table>
             <thead>
               <tr>
-                <th style="width:22%;">Platform</th>
+                <th style="width:18%;">Platform</th>
+                <th style="width:16%;">Category</th>
                 <th>Strategic Value</th>
-                <th style="width:14%;">Annual Cost</th>
-                <th style="width:16%;">Priority</th>
-                <th style="width:14%;">Action</th>
+                <th style="width:12%;">Unit Cost</th>
+                <th style="width:10%;">Licenses</th>
+                <th style="width:12%;">Annual Cost</th>
+                <th style="width:10%;">Priority</th>
+                <th style="width:10%;">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="platform">Canva Premium</td>
-                <td class="value">Visual agility &amp; brand consistency</td>
-                <td class="cost">$600 <span class="pill">Qty 3</span></td>
-                <td><span class="prio high">High</span></td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('canva')">View Details</a></td>
-              </tr>
-              <tr>
-                <td class="platform">Articulate 360</td>
-                <td class="value">Structured course logic &amp; SCORM publishing</td>
-                <td class="cost">$2,949 <span class="pill">Qty 2</span></td>
-                <td><span class="prio high">High</span></td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('articulate')">View Details</a></td>
-              </tr>
-              <tr>
-                <td class="platform">Synthesia</td>
-                <td class="value">Scalable multilingual video production</td>
-                <td class="cost">$216 <span class="pill">Qty 1</span></td>
-                <td><span class="prio high">High</span></td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('synthesia')">View Details</a></td>
-              </tr>
-              <tr>
-                <td class="platform">Smartsheet</td>
-                <td class="value">Operational visibility &amp; reporting</td>
-                <td class="cost">$228 <span class="pill">Qty 1</span></td>
-                <td><span class="prio high">High</span></td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('smartsheet')">View Details</a></td>
-              </tr>
-              <tr>
-                <td class="platform">Zapier</td>
-                <td class="value">Automation across onboarding, comms, and tracking</td>
-                <td class="cost">$240 <span class="pill">Qty 1</span></td>
-                <td><span class="prio low">Low</span></td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('zapier')">View Details</a></td>
-              </tr>
-
-              <!-- NEW -->
+              <!-- 1) ChatGPT -->
               <tr>
                 <td class="platform">ChatGPT Business</td>
-                <td class="value">AI productivity for content, analysis, and workflow acceleration</td>
-                <td class="cost">$900 <span class="pill">Qty 3</span></td>
-                <td><span class="prio high">High</span></td>
+                <td class="value">Administration &amp; reporting</td>
+                <td class="value">Drafting, research, SOPs, analysis, faster turnaround for L&amp;D ops + content</td>
+                <td class="value">$30/mo</td>
+                <td class="value">3</td>
+                <td class="cost">$1,080 <span class="pill">Qty 3</span></td>
+                <td><span class="prio high">High (1)</span></td>
                 <td class="action"><a href="javascript:void(0)" onclick="go('chatgpt')">View Details</a></td>
               </tr>
 
+              <!-- 2) Articulate AI -->
               <tr>
-                <td class="platform">Confluence </td>
-                <td class="value">Single source of truth for documentation &amp; enablement</td>
-                <td class="cost">Pending Review</td>
-                <td><span class="prio med">Medium</span></td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('confluence')">View Details</a></td>
+                <td class="platform">Articulate 360 (AI)</td>
+                <td class="value">Instructional design</td>
+                <td class="value">AI-assisted authoring, structured logic, SCORM publishing (AI Teams)</td>
+                <td class="value">$1,749/yr</td>
+                <td class="value">1</td>
+                <td class="cost">$1,749 <span class="pill">Qty 1</span></td>
+                <td><span class="prio high">High (2)</span></td>
+                <td class="action"><a href="javascript:void(0)" onclick="go('articulate')">View Details</a></td>
               </tr>
+
+              <!-- Articulate Standard (shown separately, as requested) -->
               <tr>
-                <td class="platform">Jira </td>
-                <td class="value">Work intake, prioritization, and delivery tracking</td>
-                <td class="cost">Pending Review</td>
-                <td><span class="prio med">Medium</span></td>
-                <td class="action"><a href="javascript:void(0)" onclick="go('jira')">View Details</a></td>
+                <td class="platform">Articulate 360 (Standard)</td>
+                <td class="value">Instructional design</td>
+                <td class="value">Core authoring license to build/publish courses (standard)</td>
+                <td class="value">$1,200/yr</td>
+                <td class="value">1</td>
+                <td class="cost">$1,200 <span class="pill">Qty 1</span></td>
+                <td><span class="prio high">High (2)</span></td>
+                <td class="action"><a href="javascript:void(0)" onclick="go('articulate')">View Details</a></td>
+              </tr>
+
+              <!-- 3) Synthesia -->
+              <tr>
+                <td class="platform">Synthesia</td>
+                <td class="value">Instructional design</td>
+                <td class="value">Scalable multilingual video production</td>
+                <td class="value">$216/yr</td>
+                <td class="value">1</td>
+                <td class="cost">$216 <span class="pill">Qty 1</span></td>
+                <td><span class="prio high">High (3)</span></td>
+                <td class="action"><a href="javascript:void(0)" onclick="go('synthesia')">View Details</a></td>
+              </tr>
+
+              <!-- 4) Smartsheet -->
+              <tr>
+                <td class="platform">Smartsheet</td>
+                <td class="value">Tracking &amp; measuring</td>
+                <td class="value">Operational visibility &amp; reporting</td>
+                <td class="value">$228/yr</td>
+                <td class="value">1</td>
+                <td class="cost">$228 <span class="pill">Qty 1</span></td>
+                <td><span class="prio high">High (4)</span></td>
+                <td class="action"><a href="javascript:void(0)" onclick="go('smartsheet')">View Details</a></td>
+              </tr>
+
+              <!-- 5) Canva -->
+              <tr>
+                <td class="platform">Canva Premium</td>
+                <td class="value">Instructional design</td>
+                <td class="value">Visual agility &amp; brand consistency</td>
+                <td class="value">$200/yr</td>
+                <td class="value">3</td>
+                <td class="cost">$600 <span class="pill">Qty 3</span></td>
+                <td><span class="prio high">High (5)</span></td>
+                <td class="action"><a href="javascript:void(0)" onclick="go('canva')">View Details</a></td>
+              </tr>
+
+              <!-- 6) Zapier -->
+              <tr>
+                <td class="platform">Zapier</td>
+                <td class="value">Administration &amp; reporting</td>
+                <td class="value">Automation across onboarding, comms, and tracking</td>
+                <td class="value">$240/yr</td>
+                <td class="value">1</td>
+                <td class="cost">$240 <span class="pill">Qty 1</span></td>
+                <td><span class="prio low">Low (6)</span></td>
+                <td class="action"><a href="javascript:void(0)" onclick="go('zapier')">View Details</a></td>
               </tr>
             </tbody>
           </table>
@@ -873,13 +879,84 @@
           <span class="prio high">High</span>
           <span class="prio med">Medium</span>
           <span class="prio low">Low</span>
-          <span>High = core capability / immediate impact. Medium = improves scale/consistency. Low = optional optimization.</span>
+          <span>Order = 1–6 by importance (ChatGPT → Zapier).</span>
         </div>
 
         <div class="ctaRow">
-          <button class="btn btnPrimary" onclick="go('canva')">Start with Canva Deep Dive</button>
+          <button class="btn btnPrimary" onclick="go('chatgpt')">Start with ChatGPT (Top Priority)</button>
           <button class="btn" onclick="go('articulate')">Authoring: Articulate</button>
-          <button class="btn" onclick="go('chatgpt')">AI: ChatGPT Business</button>
+          <button class="btn" onclick="go('synthesia')">Video: Synthesia</button>
+        </div>
+      </section>
+
+      <!-- CHATGPT (NEW) -->
+      <section id="page-chatgpt" class="page">
+        <div class="topline">
+          <div class="crumb">Dashboard / <b>ChatGPT Business</b></div>
+          <div class="tag"><span class="dot"></span> AI Acceleration</div>
+        </div>
+
+        <div class="toolGrid">
+          <div class="toolHero">
+            <div class="kicker">
+              Tooling Deep Dive
+              <span class="badge" style="color:var(--chatgpt);border-color:rgba(17,24,39,.18);background:rgba(17,24,39,.06);">AI ASSISTANT</span>
+              <span class="prio high">High (1)</span>
+            </div>
+            <div class="h1">ChatGPT Business</div>
+            <p class="desc">
+              Day-to-day acceleration for L&amp;D: drafting communications, SOPs, templates, course outlines, knowledge-base articles,
+              and supporting analysis/reporting — to reduce cycle time and increase consistency.
+            </p>
+
+            <div class="art">
+              <img class="artImg" src="assets/images/ChatGPT.png" alt="ChatGPT preview" onerror="this.remove()" />
+              <div class="artLabel">Drafting • Analysis • Templates • Knowledge</div>
+            </div>
+          </div>
+
+          <div class="stackCards">
+            <div class="infoCard">
+              <div class="infoRow">
+                <div class="ico">🧩</div>
+                <div>
+                  <h3>Primary Use Case</h3>
+                  <p>Content creation + operational support (documentation, comms, QA checklists, reporting narratives).</p>
+                </div>
+              </div>
+              <ul class="bullets">
+                <li>Speeds up draft → review cycles for L&amp;D deliverables.</li>
+                <li>Improves consistency via reusable prompts/templates.</li>
+                <li>Supports analysis and summarization for stakeholders.</li>
+              </ul>
+            </div>
+
+            <div class="infoCard">
+              <div class="infoRow">
+                <div class="ico" style="color:var(--danger);">⛔</div>
+                <div>
+                  <h3>Problem Solved</h3>
+                  <p>Time lost in repetitive writing, manual summarizing, and “starting from blank page” work.</p>
+                </div>
+              </div>
+              <ul class="bullets">
+                <li>Reduces turnaround time for comms, docs, and drafts.</li>
+                <li>Enables faster support for SMEs and cross-functional partners.</li>
+                <li>Creates a consistent baseline before stakeholder edits.</li>
+              </ul>
+            </div>
+
+            <div class="investment" style="background: linear-gradient(135deg, #0B1220, #111827);">
+              <div class="cap">Annual Investment</div>
+              <div class="amt">$1,080<small>.00</small></div>
+              <div class="sub">3 licenses @ $30/user/month (USD). Adjust if pricing changes.</div>
+              <div class="line"><div style="width:70%"></div></div>
+              <div class="foot">
+                <span>Budget category: Administration &amp; reporting</span>
+                <span class="hintLink">Business licensing</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -895,7 +972,7 @@
             <div class="kicker">
               Tooling Deep Dive
               <span class="badge" style="color:var(--canva);border-color:rgba(16,185,129,.25);background:rgba(16,185,129,.08);">CREATIVE ENGINE</span>
-              <span class="prio high">High</span>
+              <span class="prio high">High (5)</span>
             </div>
             <div class="h1">Canva Premium</div>
             <p class="desc">
@@ -951,7 +1028,7 @@
               <div class="sub">Allocated for 3 core designer licenses.</div>
               <div class="line"><div style="width:62%"></div></div>
               <div class="foot">
-                <span>Budget category: Content creation</span>
+                <span>Budget category: Instructional design</span>
                 <span class="hintLink">Pricing &amp; tiers</span>
               </div>
             </div>
@@ -971,7 +1048,7 @@
             <div class="kicker">
               Tooling Deep Dive
               <span class="badge" style="color:var(--articulate);border-color:rgba(79,70,229,.25);background:rgba(79,70,229,.08);">GOLD STANDARD</span>
-              <span class="prio high">High</span>
+              <span class="prio high">High (2)</span>
             </div>
             <div class="h1">Articulate 360</div>
             <p class="desc">
@@ -1001,31 +1078,6 @@
               </ul>
             </div>
 
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--danger);">⛔</div>
-                <div>
-                  <h3>Problem Solved</h3>
-                  <p>Manual course builds and inconsistent design patterns that slow publishing and QA.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Standardizes course structure via templates and reusable assets.</li>
-                <li>Reduces LMS compatibility risk with proven publishing formats.</li>
-                <li>Supports accessibility and consistent UI patterns.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">📦</div>
-                <div>
-                  <h3>Reusable Library Value</h3>
-                  <p>Creates a scalable course system (blocks, templates, question banks) that compounds over time.</p>
-                </div>
-              </div>
-            </div>
-
             <div class="investment" style="background: linear-gradient(135deg, #1F1B73, #4F46E5);">
               <div class="cap">Total License Investment</div>
               <div class="amt">$2,949<small>.00</small></div>
@@ -1037,7 +1089,7 @@
                   <b>$1,200.00</b>
                 </div>
                 <div class="row">
-                  <span class="muted">Articulate 360 AI Teams</span>
+                  <span class="muted">Articulate 360 (AI Teams)</span>
                   <b>$1,749.00</b>
                 </div>
                 <div class="row">
@@ -1048,7 +1100,7 @@
 
               <div class="line"><div style="width:78%"></div></div>
               <div class="foot">
-                <span>Budget category: eLearning authoring</span>
+                <span>Budget category: Instructional design</span>
                 <span class="hintLink">Pricing tiers</span>
               </div>
             </div>
@@ -1068,7 +1120,7 @@
             <div class="kicker">
               Tooling Deep Dive
               <span class="badge" style="color:var(--synthesia);border-color:rgba(225,29,72,.25);background:rgba(225,29,72,.08);">AI PRESENTERS</span>
-              <span class="prio high">High</span>
+              <span class="prio high">High (3)</span>
             </div>
             <div class="h1">Synthesia</div>
             <p class="desc">
@@ -1083,58 +1135,17 @@
           </div>
 
           <div class="stackCards">
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico">🌍</div>
-                <div>
-                  <h3>Primary Use Case</h3>
-                  <p>Create consistent, repeatable training videos and announcements without filming logistics.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Ideal for onboarding intros, compliance reminders, internal enablement.</li>
-                <li>Fast iteration: update text, regenerate, re-publish.</li>
-                <li>Supports distributed teams and global communication.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--danger);">⛔</div>
-                <div>
-                  <h3>Problem Solved</h3>
-                  <p>High cost and scheduling friction of professional recording/editing for internal training.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Reduces dependency on video studios and SMEs “being on camera.”</li>
-                <li>Enables consistent voice/tone across multiple programs.</li>
-                <li>Shortens time-to-publish for urgent content changes.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">⚡</div>
-                <div>
-                  <h3>Global Value</h3>
-                  <p>Scalable multilingual video creation without re-filming for each region.</p>
-                </div>
-              </div>
-            </div>
-
             <div class="investment" style="background: linear-gradient(135deg, #7F1235, #E11D48);">
               <div class="cap">Annual Starter Plan</div>
               <div class="amt">$216<small>.00</small></div>
               <div class="sub">Includes a monthly video credit allocation (per plan).</div>
               <div class="line"><div style="width:55%"></div></div>
               <div class="foot">
-                <span>Budget category: Video enablement</span>
+                <span>Budget category: Instructional design</span>
                 <span class="hintLink">Pricing guide</span>
               </div>
             </div>
 
-            <!-- Synthesia embed -->
             <div class="embedCard">
               <p class="embedTitle">Example Embed (Synthesia)</p>
               <div class="embedWrap">
@@ -1147,7 +1158,6 @@
                 ></iframe>
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -1164,7 +1174,7 @@
             <div class="kicker">
               Tooling Deep Dive
               <span class="badge" style="color:var(--smartsheet);border-color:rgba(51,65,85,.20);background:rgba(51,65,85,.06);">OPS HUB</span>
-              <span class="prio high">High</span>
+              <span class="prio high">High (4)</span>
             </div>
             <div class="h1">Smartsheet</div>
             <p class="desc">
@@ -1179,53 +1189,13 @@
           </div>
 
           <div class="stackCards">
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico">🧭</div>
-                <div>
-                  <h3>Primary Use Case</h3>
-                  <p>Track training requests, delivery milestones, and recurring reporting with clear ownership.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Standard intake (forms) → triage → delivery tracker.</li>
-                <li>Dashboards for stakeholders and leadership.</li>
-                <li>Automated reminders + status updates.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--danger);">⛔</div>
-                <div>
-                  <h3>Problem Solved</h3>
-                  <p>Disconnected email/spreadsheet tracking that makes prioritization and accountability unclear.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Single source of truth for training work and metrics.</li>
-                <li>Reduces “where is this at?” churn from stakeholders.</li>
-                <li>Improves consistency of reporting and follow-ups.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">📌</div>
-                <div>
-                  <h3>Strategic Impact</h3>
-                  <p>Centralized visibility and portfolio management for multiple training initiatives.</p>
-                </div>
-              </div>
-            </div>
-
             <div class="investment" style="background: linear-gradient(135deg, #0B1220, #334155);">
               <div class="cap">Annual Business Rate</div>
               <div class="amt">$228<small>.00</small></div>
               <div class="sub">Coverage for team collaboration and operational tracking.</div>
               <div class="line"><div style="width:58%"></div></div>
               <div class="foot">
-                <span>Budget category: Operations</span>
+                <span>Budget category: Tracking &amp; measuring</span>
                 <span class="hintLink">Pricing details</span>
               </div>
             </div>
@@ -1245,7 +1215,7 @@
             <div class="kicker">
               Tooling Deep Dive
               <span class="badge" style="color:var(--zapier);border-color:rgba(249,115,22,.25);background:rgba(249,115,22,.08);">AUTOMATION</span>
-              <span class="prio low">Low</span>
+              <span class="prio low">Low (6)</span>
             </div>
             <div class="h1">Zapier</div>
             <p class="desc">
@@ -1260,298 +1230,14 @@
           </div>
 
           <div class="stackCards">
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico">🔁</div>
-                <div>
-                  <h3>Primary Use Case</h3>
-                  <p>Automate onboarding and training follow-ups, status updates, and data syncing across tools.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Sync course completions to tracking sheets/dashboards.</li>
-                <li>Trigger scheduled follow-ups (email/Slack) based on status.</li>
-                <li>Generate weekly rollups for managers and stakeholders.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--danger);">⛔</div>
-                <div>
-                  <h3>Problem Solved</h3>
-                  <p>Manual follow-ups and repetitive admin work that creates errors and delays.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Reduces human error by standardizing triggers and rules.</li>
-                <li>Improves SLA adherence for onboarding experiences.</li>
-                <li>Scales without adding administrative headcount.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">🧱</div>
-                <div>
-                  <h3>Strategic Value</h3>
-                  <p>Automation increases reliability: the process runs even when people are busy, OOO, or shifting priorities.</p>
-                </div>
-              </div>
-            </div>
-
             <div class="investment" style="background: linear-gradient(135deg, #7C2D12, #F97316);">
               <div class="cap">Professional Annual</div>
               <div class="amt">$240<small>.00</small></div>
               <div class="sub">Supports unlimited multi-step automation workflows (per plan).</div>
               <div class="line"><div style="width:66%"></div></div>
               <div class="foot">
-                <span>Budget category: Automation</span>
+                <span>Budget category: Administration &amp; reporting</span>
                 <span class="hintLink">Compare tiers</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- NEW: CHATGPT BUSINESS -->
-      <section id="page-chatgpt" class="page">
-        <div class="topline">
-          <div class="crumb">Dashboard / <b>ChatGPT Business</b></div>
-          <div class="tag"><span class="dot"></span> AI Productivity</div>
-        </div>
-
-        <div class="toolGrid">
-          <div class="toolHero">
-            <div class="kicker">
-              Tooling Deep Dive
-              <span class="badge" style="color:var(--chatgpt);border-color:rgba(17,24,39,.18);background:rgba(17,24,39,.06);">AI ASSISTANT</span>
-              <span class="prio high">High</span>
-            </div>
-            <div class="h1">ChatGPT Business</div>
-            <p class="desc">
-              Enterprise-friendly AI assistant to accelerate L&amp;D content creation, analysis, and operational workflows —
-              improving speed, consistency, and stakeholder support across programs.
-            </p>
-
-            <div class="art">
-              <!-- Optional: add an image later if you want (assets/images/ChatGPT.png). Safe fallback with onerror. -->
-              <img class="artImg" src="assets/images/ChatGPT.png" alt="ChatGPT Business preview" onerror="this.remove()" />
-              <div class="artLabel">Content drafting • Data support • Faster iteration</div>
-            </div>
-          </div>
-
-          <div class="stackCards">
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico">✍️</div>
-                <div>
-                  <h3>Primary Use Case</h3>
-                  <p>Draft and refine learning content (scripts, job aids, comms) and support faster iteration with SMEs.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Rapid first drafts for modules, summaries, and manager guides.</li>
-                <li>Rewrite/standardize tone across communications and training.</li>
-                <li>Support analysis and reporting narratives for stakeholders.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--danger);">⛔</div>
-                <div>
-                  <h3>Problem Solved</h3>
-                  <p>Time-intensive drafting, rework cycles, and bottlenecks for content updates and stakeholder requests.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Reduces time-to-first-draft and helps unblock delivery.</li>
-                <li>Improves consistency across regions and audiences.</li>
-                <li>Supports faster turnaround for urgent updates.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">🚀</div>
-                <div>
-                  <h3>Strategic Value</h3>
-                  <p>Raises team throughput by turning repetitive work into reusable patterns and quick iterations.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="investment" style="background: linear-gradient(135deg, #0B1220, #111827);">
-              <div class="cap">Licensing (USD)</div>
-              <div class="amt">$900<small>.00</div>
-              <div class="sub">Included in plan for 3 additional ChatGPT Business licenses (Qty 3).</div>
-              <div class="line"><div style="width:60%"></div></div>
-              <div class="foot">
-                <span>Budget category: AI productivity</span>
-                <span class="hintLink">Rate confirmation</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONFLUENCE -->
-      <section id="page-confluence" class="page">
-        <div class="topline">
-          <div class="crumb">Dashboard / <b>Confluence</b></div>
-          <div class="tag"><span class="dot"></span> Knowledge Base</div>
-        </div>
-
-        <div class="toolGrid">
-          <div class="toolHero">
-            <div class="kicker">
-              Tooling Deep Dive
-              <span class="badge" style="color:var(--conf);border-color:rgba(14,165,233,.25);background:rgba(14,165,233,.08);">KNOWLEDGE</span>
-              <span class="prio med">Medium</span>
-            </div>
-            <div class="h1">Confluence</div>
-            <p class="desc">
-              The home for documented processes, L&amp;D standards, training catalogs, and manager/employee resources.
-              Enables consistent execution and self-service across the org.
-            </p>
-
-            <div class="art">
-              <img class="artImg" src="assets/images/Confluence.webp" alt="Confluence preview" onerror="this.remove()" />
-              <div class="artLabel">SSOT • Process docs • Resource centers</div>
-            </div>
-          </div>
-
-          <div class="stackCards">
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico">📚</div>
-                <div>
-                  <h3>Primary Use Case</h3>
-                  <p>Single source of truth for learning processes, reporting definitions, and enablement materials.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Standard operating procedures (SOPs) for training operations.</li>
-                <li>Resource centers for managers and employees.</li>
-                <li>Decision logs, templates, and playbooks.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--danger);">⛔</div>
-                <div>
-                  <h3>Problem Solved</h3>
-                  <p>Knowledge trapped in Slack threads, individual docs, or “tribal” memory that breaks continuity.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Improves consistency across new hires and cross-team handoffs.</li>
-                <li>Reduces repetitive questions by enabling self-service.</li>
-                <li>Creates audit-friendly documentation for compliance needs.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">🧩</div>
-                <div>
-                  <h3>Strategic Value</h3>
-                  <p>Enables scalable training operations by documenting how work is done — not just what is done.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="investment" style="background: linear-gradient(135deg, #075985, #0EA5E9);">
-              <div class="cap">Annual Cost</div>
-              <div class="amt">Included</div>
-              <div class="sub">Cost excluded from this proposal (already provisioned within existing Atlassian stack).</div>
-              <div class="line"><div style="width:50%"></div></div>
-              <div class="foot">
-                <span>Budget category: Knowledge management</span>
-                <span class="hintLink">Atlassian licensing</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- JIRA -->
-      <section id="page-jira" class="page">
-        <div class="topline">
-          <div class="crumb">Dashboard / <b>Jira</b></div>
-          <div class="tag"><span class="dot"></span> Work Tracking</div>
-        </div>
-
-        <div class="toolGrid">
-          <div class="toolHero">
-            <div class="kicker">
-              Tooling Deep Dive
-              <span class="badge" style="color:var(--jira);border-color:rgba(37,99,235,.25);background:rgba(37,99,235,.08);">DELIVERY</span>
-              <span class="prio med">Medium</span>
-            </div>
-            <div class="h1">Jira</div>
-            <p class="desc">
-              Intake, prioritization, and delivery tracking for L&amp;D work: training requests, course updates,
-              compliance initiatives, and operational improvements — with visibility across stakeholders.
-            </p>
-
-            <div class="art">
-              <img class="artImg" src="assets/images/Jira%20Image.png" alt="Jira preview" onerror="this.remove()" />
-              <div class="artLabel">Intake → Prioritize → Deliver • SLAs • Reporting</div>
-            </div>
-          </div>
-
-          <div class="stackCards">
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico">📥</div>
-                <div>
-                  <h3>Primary Use Case</h3>
-                  <p>Centralized request intake and delivery tracking with clear ownership, due dates, and status.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Standardized ticket workflow (request → triage → build → QA → release).</li>
-                <li>SLA visibility for stakeholders (what is planned vs. in progress vs. blocked).</li>
-                <li>Better demand management for L&amp;D.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--danger);">⛔</div>
-                <div>
-                  <h3>Problem Solved</h3>
-                  <p>Unstructured requests across email/Slack that create ambiguity on priority and completion.</p>
-                </div>
-              </div>
-              <ul class="bullets">
-                <li>Reduces scope creep by documenting acceptance criteria and decisions.</li>
-                <li>Improves transparency: stakeholders can self-check status.</li>
-                <li>Enables forecasting: what the team can realistically deliver.</li>
-              </ul>
-            </div>
-
-            <div class="infoCard">
-              <div class="infoRow">
-                <div class="ico" style="color:var(--success);">📊</div>
-                <div>
-                  <h3>Strategic Value</h3>
-                  <p>Improves throughput and predictability for L&amp;D delivery — especially for compliance and onboarding.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="investment" style="background: linear-gradient(135deg, #1E3A8A, #2563EB);">
-              <div class="cap">Annual Cost</div>
-              <div class="amt">Included</div>
-              <div class="sub">Cost excluded from this proposal (already provisioned within existing Atlassian stack).</div>
-              <div class="line"><div style="width:50%"></div></div>
-              <div class="foot">
-                <span>Budget category: Work management</span>
-                <span class="hintLink">Atlassian licensing</span>
               </div>
             </div>
           </div>
@@ -1562,6 +1248,26 @@
   </div>
 
   <script>
+    // If you want to adjust ChatGPT pricing quickly, update these:
+    const CHATGPT_UNIT_MONTHLY = 30; // USD per user per month (assumption)
+    const CHATGPT_QTY = 3;
+
+    // Optional: auto-update totals shown on the page
+    (function syncTotals(){
+      const base = 4233; // previous total (Canva 600 + Articulate 2949 + Synthesia 216 + Smartsheet 228 + Zapier 240)
+      const chatgptAnnual = CHATGPT_UNIT_MONTHLY * 12 * CHATGPT_QTY; // 30*12*3 = 1080
+      const total = base + chatgptAnnual;
+
+      const fmt = new Intl.NumberFormat('en-US', { style:'currency', currency:'USD', minimumFractionDigits:2 });
+      const fmtNoDecimals = new Intl.NumberFormat('en-US');
+
+      const totalBudget = document.getElementById('totalBudget');
+      const coreStack = document.getElementById('coreStack');
+
+      if(totalBudget) totalBudget.textContent = fmt.format(total);
+      if(coreStack) coreStack.innerHTML = `$${fmtNoDecimals.format(total)}<small>/yr</small>`;
+    })();
+
     function go(page){
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       const target = document.getElementById('page-' + page);
