@@ -30,6 +30,9 @@
       --zapier:#F97316;
       --conf:#0EA5E9;
       --jira:#2563EB;
+
+      /* NEW */
+      --chatgpt:#111827;
     }
 
     *{ box-sizing:border-box; }
@@ -700,6 +703,12 @@
           <span class="navtext"><span class="label">Zapier</span><span class="hint">Automation</span></span>
         </button>
 
+        <!-- NEW -->
+        <button class="navbtn" data-page="chatgpt" onclick="go('chatgpt')">
+          <span class="navicon">🤖</span>
+          <span class="navtext"><span class="label">ChatGPT Business</span><span class="hint">AI assistant</span></span>
+        </button>
+
         <button class="navbtn" data-page="confluence" onclick="go('confluence')">
           <span class="navicon">📘</span>
           <span class="navtext"><span class="label">Confluence</span><span class="hint">Knowledge base</span></span>
@@ -712,9 +721,11 @@
 
         <div class="budget">
           <div class="cap">Total Annual Budget</div>
+          <!-- kept as-is; ChatGPT included below as pending USD -->
           <div class="amt">$4,233.00</div>
           <div class="note">
             Aggregated licensing for 5 primary platforms.
+            <br/>+ ChatGPT Business (Qty 3) — USD (pending rate confirmation).
             <br/>Confluence &amp; Jira costs excluded (already provisioned).
           </div>
         </div>
@@ -743,6 +754,7 @@
             <span class="chip">Operational visibility</span>
             <span class="chip">Automation</span>
             <span class="chip">Knowledge &amp; delivery</span>
+            <span class="chip">AI productivity</span>
           </div>
         </div>
 
@@ -752,8 +764,9 @@
               <h3>Core Stack Cost</h3>
               <div class="miniicon">💵</div>
             </div>
+            <!-- kept as-is; ChatGPT is a new add-on line item -->
             <div class="metric">$4,233<small>/yr</small></div>
-            <p>Aggregated licensing for 5 primary platforms supporting L&amp;D content development, delivery, and operations.</p>
+            <p>Aggregated licensing for 5 primary platforms supporting L&amp;D content development, delivery, and operations. (ChatGPT Business added as a separate line item.)</p>
           </div>
 
           <div class="card">
@@ -827,6 +840,16 @@
                 <td><span class="prio low">Low</span></td>
                 <td class="action"><a href="javascript:void(0)" onclick="go('zapier')">View Details</a></td>
               </tr>
+
+              <!-- NEW -->
+              <tr>
+                <td class="platform">ChatGPT Business</td>
+                <td class="value">AI productivity for content, analysis, and workflow acceleration</td>
+                <td class="cost">Pending Review (USD) <span class="pill">Qty 3</span></td>
+                <td><span class="prio high">High</span></td>
+                <td class="action"><a href="javascript:void(0)" onclick="go('chatgpt')">View Details</a></td>
+              </tr>
+
               <tr>
                 <td class="platform">Confluence </td>
                 <td class="value">Single source of truth for documentation &amp; enablement</td>
@@ -856,7 +879,7 @@
         <div class="ctaRow">
           <button class="btn btnPrimary" onclick="go('canva')">Start with Canva Deep Dive</button>
           <button class="btn" onclick="go('articulate')">Authoring: Articulate</button>
-          <button class="btn" onclick="go('zapier')">Automation: Zapier</button>
+          <button class="btn" onclick="go('chatgpt')">AI: ChatGPT Business</button>
         </div>
       </section>
 
@@ -1231,7 +1254,6 @@
             </p>
 
             <div class="art">
-              <!-- UPDATED: your note says assets/images/Images.png is Zapier -->
               <img class="artImg" src="assets/images/Zapier.png" alt="Zapier preview" onerror="this.remove()" />
               <div class="artLabel">Multi-step workflows • Triggers • Notifications</div>
             </div>
@@ -1286,6 +1308,88 @@
               <div class="foot">
                 <span>Budget category: Automation</span>
                 <span class="hintLink">Compare tiers</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEW: CHATGPT BUSINESS -->
+      <section id="page-chatgpt" class="page">
+        <div class="topline">
+          <div class="crumb">Dashboard / <b>ChatGPT Business</b></div>
+          <div class="tag"><span class="dot"></span> AI Productivity</div>
+        </div>
+
+        <div class="toolGrid">
+          <div class="toolHero">
+            <div class="kicker">
+              Tooling Deep Dive
+              <span class="badge" style="color:var(--chatgpt);border-color:rgba(17,24,39,.18);background:rgba(17,24,39,.06);">AI ASSISTANT</span>
+              <span class="prio high">High</span>
+            </div>
+            <div class="h1">ChatGPT Business</div>
+            <p class="desc">
+              Enterprise-friendly AI assistant to accelerate L&amp;D content creation, analysis, and operational workflows —
+              improving speed, consistency, and stakeholder support across programs.
+            </p>
+
+            <div class="art">
+              <!-- Optional: add an image later if you want (assets/images/ChatGPT.png). Safe fallback with onerror. -->
+              <img class="artImg" src="assets/images/ChatGPT.png" alt="ChatGPT Business preview" onerror="this.remove()" />
+              <div class="artLabel">Content drafting • Data support • Faster iteration</div>
+            </div>
+          </div>
+
+          <div class="stackCards">
+            <div class="infoCard">
+              <div class="infoRow">
+                <div class="ico">✍️</div>
+                <div>
+                  <h3>Primary Use Case</h3>
+                  <p>Draft and refine learning content (scripts, job aids, comms) and support faster iteration with SMEs.</p>
+                </div>
+              </div>
+              <ul class="bullets">
+                <li>Rapid first drafts for modules, summaries, and manager guides.</li>
+                <li>Rewrite/standardize tone across communications and training.</li>
+                <li>Support analysis and reporting narratives for stakeholders.</li>
+              </ul>
+            </div>
+
+            <div class="infoCard">
+              <div class="infoRow">
+                <div class="ico" style="color:var(--danger);">⛔</div>
+                <div>
+                  <h3>Problem Solved</h3>
+                  <p>Time-intensive drafting, rework cycles, and bottlenecks for content updates and stakeholder requests.</p>
+                </div>
+              </div>
+              <ul class="bullets">
+                <li>Reduces time-to-first-draft and helps unblock delivery.</li>
+                <li>Improves consistency across regions and audiences.</li>
+                <li>Supports faster turnaround for urgent updates.</li>
+              </ul>
+            </div>
+
+            <div class="infoCard">
+              <div class="infoRow">
+                <div class="ico" style="color:var(--success);">🚀</div>
+                <div>
+                  <h3>Strategic Value</h3>
+                  <p>Raises team throughput by turning repetitive work into reusable patterns and quick iterations.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="investment" style="background: linear-gradient(135deg, #0B1220, #111827);">
+              <div class="cap">Licensing (USD)</div>
+              <div class="amt">Pending Review</div>
+              <div class="sub">Included in plan for 3 additional ChatGPT Business licenses (Qty 3).</div>
+              <div class="line"><div style="width:60%"></div></div>
+              <div class="foot">
+                <span>Budget category: AI productivity</span>
+                <span class="hintLink">Rate confirmation</span>
               </div>
             </div>
           </div>
